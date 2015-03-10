@@ -10,3 +10,63 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
+#Tells git which files to ignore (ie not keep in version control)
+
+# Dashboard conf files
+.dashboard*
+
+# Generated report/temporary files
+.docx
+.pdf
+
+#Entire directories to ignore
+bin/
+gen/
+tmp/
+
+#Local configuration file
+local.properties
+
+#Backup, swap, MacOS dir file, etc.
+*~
+*.lock
+*.DS_Store
+*.swp
+*.out
+*.cache
+Thumbs.db
+
+#ignore binaries
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+*.dex
+*.apk
+*.ap_
+
+# Locally stored "Eclipse launch configurations"
+*.launch
+
+# Eclipse-specific
+*.pydevproject
+.metadata
+*.tmp
+*.bak
+*.swp
+*~.nib
+*.loadpath
+*.cache
+
+# Stuff not to ignore.
+!net.ontopia.utils/**/*.class
+!com.ximpleware/**/*.class
+!au.com.bytecode.opencsv/**/*.class
+!org.jfree/**/*.class
+!org.jfree/**/*.class
+!net.sf.javabdd/**/*.class
+!**/libbuddy.so
+!**/buddy.dll
