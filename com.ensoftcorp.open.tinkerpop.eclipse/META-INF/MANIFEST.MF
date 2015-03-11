@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: TinkerAtlas
+Bundle-SymbolicName: com.ensoftcorp.open.tinkerpop.eclipse;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: com.ensoftcorp.open.tinkeratlas.eclipse.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ com.ensoftcorp.atlas.c.core;bundle-version="0.32.1",
+ com.ensoftcorp.atlas.core;bundle-version="0.32.1",
+ com.ensoftcorp.atlas.java.core;bundle-version="0.32.1",
+ com.ensoftcorp.atlas.jimple.core;bundle-version="1.0.0"
+Bundle-ActivationPolicy: lazy

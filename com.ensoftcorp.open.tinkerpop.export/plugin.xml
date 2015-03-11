@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.actionSets">
+      <actionSet
+            label="TinkerAtlas"
+            visible="true"
+            id="TinkerAtlas.actionSet">
+         <menu
+               label="TinkerAtlas"
+               id="tinkerAtlasMenu">
+            <separator
+                  name="tinkerAtlasGroup">
+            </separator>
+         </menu>
+         <action
+               label="&amp;Export Atlas Graph for Tinkerpop"
+               icon="icons/tinkerpop.png"
+               class="com.ensoftcorp.open.tinkeratlas.actions.ExportAction"
+               tooltip="Export current Atlas index for Tinkerpop"
+               menubarPath="tinkerAtlasMenu/tinkerAtlasGroup"
+               toolbarPath="tinkerAtlasGroup"
+               id="com.ensoftcorp.open.tinkeratlas.actions.ExportAction">
+         </action>
+      </actionSet>
+   </extension>
+
+</plugin>
