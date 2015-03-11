@@ -1,17 +1,17 @@
 package com.ensoftcorp.open.tinkeratlas.tinkerpop;
 
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import com.ensoftcorp.atlas.core.db.graph.GraphElement;
-import com.ensoftcorp.atlas.core.query.Attr.Edge;
-import com.ensoftcorp.atlas.core.query.Attr.Node;
 import com.tinkerpop.gremlin.structure.Element;
 import com.tinkerpop.gremlin.structure.Graph;
 import com.tinkerpop.gremlin.structure.Property;
 
 public class AtlasElement implements Element{
 	GraphElement ge;
+	String label;
 	
 	public AtlasElement(GraphElement ge){
 		this.ge = ge;
@@ -34,8 +34,23 @@ public class AtlasElement implements Element{
 
 	@Override
 	public String label() {
-		String name = (String) (com.ensoftcorp.atlas.core.db.graph.Graph.U.nodes().contains(ge) ? ge.getAttr(Node.NAME):ge.getAttr(Edge.NAME));
-		return name == null ? "":name;
+		if(label == null){
+			int count = 0;
+			for(String s : ge.tagsI()) ++count;
+			String[] tags = new String[count];
+			int i = 0;
+			for(String s : ge.tagsI()) tags[i++] = s;
+			Arrays.sort(tags);
+			
+			StringBuilder sb = new StringBuilder();
+			for(i = 0; i < tags.length; i++){
+				sb.append(tags[i]);
+				if(i < tags.length - 1) 
+					sb.append("::");
+			}
+			label = sb.toString();
+		}
+		return label;
 	}
 
 	@Override

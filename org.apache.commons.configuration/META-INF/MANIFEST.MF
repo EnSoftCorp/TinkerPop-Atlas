@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Configuration
+Bundle-SymbolicName: org.apache.commons.configuration
+Bundle-Version: 1.0.0
+Bundle-ClassPath: .
+Export-Package: org.apache.commons.configuration,
+ org.apache.commons.configuration.beanutils,
+ org.apache.commons.configuration.event,
+ org.apache.commons.configuration.interpol,
+ org.apache.commons.configuration.plist,
+ org.apache.commons.configuration.reloading,
+ org.apache.commons.configuration.resolver,
+ org.apache.commons.configuration.tree,
+ org.apache.commons.configuration.tree.xpath,
+ org.apache.commons.configuration.web
