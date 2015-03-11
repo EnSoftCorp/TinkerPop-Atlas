@@ -62,11 +62,5 @@ Thumbs.db
 *.cache
 
 # Stuff not to ignore.
-!net.ontopia.utils/**/*.class
-!com.ximpleware/**/*.class
-!au.com.bytecode.opencsv/**/*.class
-!org.jfree/**/*.class
-!org.jfree/**/*.class
-!net.sf.javabdd/**/*.class
-!**/libbuddy.so
-!**/buddy.dll
+!com.tinkerpop/**/*.class
+!org.apache.commons/**/*.class
