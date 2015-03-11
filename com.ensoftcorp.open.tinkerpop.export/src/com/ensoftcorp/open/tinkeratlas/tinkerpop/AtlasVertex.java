@@ -39,7 +39,7 @@ public class AtlasVertex extends AtlasElement implements Vertex {
 	class AtlasVertexIterators implements Vertex.Iterators{
 		@Override
 		public Iterator<Edge> edgeIterator(Direction direction, String... edgeLabels){
-			return new VertexEdgeIterator(direction, edgeLabels);
+			return new AtlasVertexEdgeIterator(direction, edgeLabels);
 		}
 
 		@Override
@@ -49,14 +49,14 @@ public class AtlasVertex extends AtlasElement implements Vertex {
 
 		@Override
 		public Iterator<Vertex> vertexIterator(Direction arg0, String... arg1) {
-			return new VertexNeighborIterator(arg0, arg1);
+			return new AtlasVertexNeighborIterator(arg0, arg1);
 		}
 	}
 
-	class VertexNeighborIterator implements Iterator<Vertex>{
+	class AtlasVertexNeighborIterator implements Iterator<Vertex>{
 		Iterator<GraphElement> iter;
 		
-		public VertexNeighborIterator(Direction direction, String... labels){
+		AtlasVertexNeighborIterator(Direction direction, String... labels){
 			Q geQ = Common.toQ(Common.toGraph(ge));
 			Q c = Common.universe().edgesTaggedWithAny(labels);
 			switch(direction){
@@ -80,9 +80,9 @@ public class AtlasVertex extends AtlasElement implements Vertex {
 		}
 	}
 	
-	class VertexEdgeIterator implements Iterator<Edge>{
+	class AtlasVertexEdgeIterator implements Iterator<Edge>{
 		Iterator<GraphElement> edgeIterator;
-		public VertexEdgeIterator(Direction direction, String... labels){
+		AtlasVertexEdgeIterator(Direction direction, String... labels){
 			AtlasSet<GraphElement> edges = com.ensoftcorp.atlas.core.db.graph.Graph.U.edges(ge, direction == Direction.OUT ? NodeDirection.OUT:NodeDirection.IN);
 			if(direction == Direction.BOTH) edges = new UnionSet<GraphElement>(edges, com.ensoftcorp.atlas.core.db.graph.Graph.U.edges(ge, direction == Direction.OUT ? NodeDirection.IN:NodeDirection.OUT));
 			edgeIterator = edges.taggedWithAny(labels).iterator();
@@ -97,23 +97,9 @@ public class AtlasVertex extends AtlasElement implements Vertex {
 		}
 	}
 	
-	class VertexPropertyIterator<V> implements Iterator<VertexProperty<V>>{
-		Iterator<String> keyIter = ge.attr().keyIterator();
-		
-		@Override
-		public boolean hasNext() {
-			return keyIter.hasNext();
-		}
-
-		@Override
-		public VertexProperty<V> next() {
-			return new AtlasVertexProperty<V>(keyIter.next());
-		}
-	}
-	
 	class AtlasVertexProperty<V> implements VertexProperty<V>{
 		String key;
-		public AtlasVertexProperty(String key){
+		AtlasVertexProperty(String key){
 			this.key = key;
 		}
 		@Override
@@ -166,31 +152,14 @@ public class AtlasVertex extends AtlasElement implements Vertex {
 		}
 	}
 	
-	class AtlasPropertyIterator<V> implements Iterator<Property<V>>{
-		String[] keys;
-		int idx = 0;
-		public AtlasPropertyIterator(String... keys){
-			this.keys = keys;
-		}
-		
-		@Override
-		public boolean hasNext() {
-			return idx < keys.length;
-		}
-
-		@Override
-		public Property<V> next() {
-			return new AtlasProperty<V>(keys[idx++]);
-		}
-	}
-	
 	class AtlasVertexPropertyIterator<V> implements Iterator<VertexProperty<V>>{
 		String[] keys;
 		int idx = 0;
-		public AtlasVertexPropertyIterator(String... keys){
+		
+		AtlasVertexPropertyIterator(String... keys){
 			this.keys = keys;
 		}
-		
+
 		@Override
 		public boolean hasNext() {
 			return idx < keys.length;

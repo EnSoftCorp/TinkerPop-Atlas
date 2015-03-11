@@ -52,27 +52,37 @@ public class AtlasElement implements Element{
 		@Override
 		public <V> Iterator<? extends Property<V>> propertyIterator(
 				String... arg0) {
-			return (Iterator<? extends Property<V>>) new AtlasValueIterator<V>();
+			return (Iterator<? extends Property<V>>) new AtlasPropertyIterator<V>();
 		}
 	}
-	
-	class AtlasValueIterator<V> implements Iterator<Property<V>>{
-		Iterator<String> keyIter = ge.attr().keyIterator();
+
+	class AtlasPropertyIterator<V> implements Iterator<Property<V>>{
+		String[] keys;
+		int idx = 0;
+		AtlasPropertyIterator(String... keys){
+			this.keys = keys;
+		}
+		
+		AtlasPropertyIterator(){
+			this.keys = new String[(int) ge.attr().size()];
+			int i = 0;
+			for(String key : ge.attr().keys()) keys[i] = key;
+		}
 		
 		@Override
 		public boolean hasNext() {
-			return keyIter.hasNext();
+			return idx < keys.length;
 		}
 
 		@Override
 		public Property<V> next() {
-			return new AtlasProperty<V>(keyIter.next());
+			return new AtlasProperty<V>(keys[idx++]);
 		}
 	}
 	
 	class AtlasProperty<V> implements Property<V>{
 		String key;
-		public AtlasProperty(String key){
+		AtlasProperty(String key){
 			this.key = key;
 		}
 
